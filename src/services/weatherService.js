@@ -51,14 +51,18 @@ const formatForecastWeather = data => {
 
   let daily = [];
   for (let i = 0; i < list.length; i++) {
-    if ((!(i % 8) && i !== 0) || i === 39) {
+    if (!(i % 8)) {
       daily.push(list[i]);
     }
   }
 
   daily = daily.map(d => {
     return {
-      title: formatToLocalTime(d.dt, timezone, 'cccc'),
+      title: formatToLocalTime(
+        d.dt,
+        `UTC+${timezone / 3600}`.replace('+-', '-'),
+        'cccc'
+      ),
       temp: d.main.temp,
       icon: d.weather[0].icon,
     };
@@ -67,7 +71,7 @@ const formatForecastWeather = data => {
   let everyThreeHours = list.slice(1, 6).map(d => {
     return {
       title: formatToLocalTime(d.dt, timezone, 'HH:mm'),
-      temp: d.temp,
+      temp: d.main.temp,
       icon: d.weather[0].icon,
     };
   });
@@ -98,4 +102,9 @@ const formatToLocalTime = (
   format = "cccc, dd LLL yyyy' | Local time: 'HH:mm"
 ) => DateTime.fromSeconds(secs).setZone(zone).toFormat(format);
 
-export default getFormattedWeatherData;
+const iconUrlFromCode = code =>
+  `http://openweathermap.org/img/wn/${code}@2x.png`;
+
+// export default getFormattedWeatherData;
+
+export { getFormattedWeatherData, formatToLocalTime, iconUrlFromCode };
