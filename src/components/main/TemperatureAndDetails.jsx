@@ -6,11 +6,14 @@ import {
   UilSun,
   UilSunset,
 } from '@iconscout/react-unicons';
-import { formatToLocalTime, iconUrlFromCode } from '../services/weatherService';
+import {
+  formatToLocalTime,
+  iconUrlFromCode,
+} from '../../services/weatherService';
 
 function TemperatureAndDetails({
   weather: {
-    details,
+    description,
     icon,
     temp,
     temp_min,
@@ -22,11 +25,12 @@ function TemperatureAndDetails({
     feels_like,
     timezone,
   },
+  units,
 }) {
   return (
-    <div>
+    <section>
       <div className='flex items-center justify-center py-6 text-xl text-cyan-300'>
-        <p>{details}</p>
+        <p className='capitalize'>{description}</p>
       </div>
 
       <div className='flex flex-row items-center justify-between text-white py-3'>
@@ -36,7 +40,7 @@ function TemperatureAndDetails({
           <div className='flex font-light text-sm items-center justify-center'>
             <UilTemperature size={18} className='mr-1' />
             <p>
-              Real feel:
+              Відчувається як:
               <span className='font-medium ml-1'>{`${Math.round(
                 feels_like
               )}°`}</span>
@@ -46,7 +50,7 @@ function TemperatureAndDetails({
           <div className='flex font-light text-sm items-center justify-center'>
             <UilTear size={18} className='mr-1' />
             <p>
-              Humidity:
+              Вологість:
               <span className='font-medium ml-1'>{`${Math.round(
                 humidity
               )}%`}</span>
@@ -56,10 +60,10 @@ function TemperatureAndDetails({
           <div className='flex font-light text-sm items-center justify-center'>
             <UilWind size={18} className='mr-1' />
             <p>
-              Wind:
-              <span className='font-medium ml-1'>{`${Math.round(
-                speed
-              )} km/h`}</span>
+              Швидкість вітру:
+              <span className='font-medium ml-1'>{`${Math.round(speed)} ${
+                units === 'metric' ? 'м/с' : 'mph'
+              }`}</span>
             </p>
           </div>
         </div>
@@ -68,36 +72,36 @@ function TemperatureAndDetails({
       <div className='flex flex-row items-center justify-center space-x-2 text-white text-sm py-3'>
         <UilSun />
         <p className='font-light'>
-          Rise:{' '}
+          Схід:{' '}
           <span className='font-medium ml-1'>
-            {formatToLocalTime(sunrise, timezone, 'HH:mm')}
+            {formatToLocalTime(sunrise, timezone, 'T')}
           </span>
         </p>
         <p className='font-light'>|</p>
 
         <UilSunset />
         <p className='font-light'>
-          Set:{' '}
+          Захід:{' '}
           <span className='font-medium ml-1'>
-            {formatToLocalTime(sunset, timezone, 'HH:mm')}
+            {formatToLocalTime(sunset, timezone, 'T')}
           </span>
         </p>
         <p className='font-light'>|</p>
 
         <UilSun />
         <p className='font-light'>
-          High:{' '}
+          Макс:{' '}
           <span className='font-medium ml-1'>{`${Math.round(temp_max)}°`}</span>
         </p>
         <p className='font-light'>|</p>
 
         <UilSun />
         <p className='font-light'>
-          Low:{' '}
+          Мін:{' '}
           <span className='font-medium ml-1'>{`${Math.round(temp_min)}°`}</span>
         </p>
       </div>
-    </div>
+    </section>
   );
 }
 

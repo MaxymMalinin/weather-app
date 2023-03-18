@@ -1,9 +1,9 @@
 import './App.css';
-import TopButtons from './components/TopButtons';
-import Inputs from './components/Inputs';
-import TimeAndLocation from './components/TimeAndLocation';
-import TemperatureAndDetails from './components/TemperatureAndDetails';
-import Forecast from './components/Forecast';
+import TopButtons from './components/header/TopButtons';
+import Inputs from './components/header/Inputs';
+import TimeAndLocation from './components/main/TimeAndLocation';
+import TemperatureAndDetails from './components/main/TemperatureAndDetails';
+import Forecast from './components/main/Forecast';
 import { getFormattedWeatherData } from './services/weatherService';
 import { useEffect, useState } from 'react';
 
@@ -16,7 +16,6 @@ function App() {
     const fetchWeather = async () => {
       await getFormattedWeatherData({ ...query, units }).then(data => {
         setWeather(data);
-        console.log(data);
       });
     };
 
@@ -24,20 +23,33 @@ function App() {
   }, [query, units]);
 
   return (
-    <div className='mx-auto max-w-screen-md mt-4 py-5 px-32 bg-gradient-to-br from-cyan-700 to-blue-700 h-fit shadow-xl shadow-gray-400'>
-      <TopButtons setQuery={setQuery} />
-      <Inputs setQuery={setQuery} units={units} setUnits={setUnits} />
+    <>
+      {/* className='mx-auto max-w-screen-md mt-4 py-5 px-32 bg-gradient-to-br
+      from-cyan-700 to-blue-700 h-fit shadow-xl shadow-gray-400' */}
+      <header
+        className='mx-auto max-w-screen-md mt-4 py-5 px-32 bg-gradient-to-br
+      from-cyan-700 to-blue-700 h-fit shadow-xl shadow-gray-400'
+      >
+        <TopButtons setQuery={setQuery} />
+        <Inputs setQuery={setQuery} units={units} setUnits={setUnits} />
+      </header>
 
       {weather && (
-        <>
+        <main
+          className='mx-auto max-w-screen-md mt-4 py-5 px-32 bg-gradient-to-br
+      from-cyan-700 to-blue-700 h-fit shadow-xl shadow-gray-400'
+        >
           <TimeAndLocation weather={weather} />
-          <TemperatureAndDetails weather={weather} />
+          <TemperatureAndDetails weather={weather} units={units} />
 
-          <Forecast title='hourl forecast' items={weather.everyThreeHours} />
-          <Forecast title='daily forecast' items={weather.daily} />
-        </>
+          <Forecast
+            title='Погода на 3 години'
+            items={weather.everyThreeHours}
+          />
+          <Forecast title='Погода на 5 днів' items={weather.daily} />
+        </main>
       )}
-    </div>
+    </>
   );
 }
 

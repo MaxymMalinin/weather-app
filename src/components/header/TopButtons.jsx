@@ -4,28 +4,28 @@ function TopButtons({ setQuery }) {
   const cities = [
     {
       id: 1,
-      title: 'London',
+      title: 'Київ',
     },
     {
       id: 2,
-      title: 'Sydney',
+      title: 'Львів',
     },
     {
       id: 3,
-      title: 'Tokyo',
+      title: 'Одеса',
     },
     {
       id: 4,
-      title: 'Toronto',
+      title: 'Харків',
     },
     {
       id: 5,
-      title: 'Paris',
+      title: 'Дніпро',
     },
   ];
 
   return (
-    <div className='flex items-center justify-around my-6'>
+    <nav className='flex items-center justify-around my-6'>
       {cities.map(city => (
         <button
           key={city.id}
@@ -35,7 +35,7 @@ function TopButtons({ setQuery }) {
           {city.title}
         </button>
       ))}
-    </div>
+    </nav>
   );
 }
 

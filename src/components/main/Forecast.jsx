@@ -1,9 +1,9 @@
 import React from 'react';
-import { iconUrlFromCode } from '../services/weatherService';
+import { iconUrlFromCode } from '../../services/weatherService';
 
 function Forecast({ title, items }) {
   return (
-    <div>
+    <section>
       <div className='flex items-center justify-start mt-6'>
         <p className='text-white font-medium uppercase'>{title}</p>
       </div>
@@ -16,7 +16,7 @@ function Forecast({ title, items }) {
             key={index}
             className='flex flex-col items-center justify-center'
           >
-            <p className='font-light text-sm'>{item.title}</p>
+            <p className='font-light text-sm capitalize'>{item.title}</p>
             <img
               src={iconUrlFromCode(item.icon)}
               alt=''
@@ -26,7 +26,7 @@ function Forecast({ title, items }) {
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 }
 
