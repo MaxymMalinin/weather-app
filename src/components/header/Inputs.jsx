@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { UilSearch, UilLocationPoint } from '@iconscout/react-unicons';
 
-function Inputs({ setQuery }) {
+function Inputs({ setQuery, error }) {
   const [city, setCity] = useState('');
 
   const handleSearchClick = () => {
-    if (city !== '') setQuery({ q: city });
+    if (city !== '') {
+      setQuery({ q: city });
+      setCity('');
+    }
   };
 
   const handleLocationClick = () => {
@@ -23,7 +26,7 @@ function Inputs({ setQuery }) {
   };
 
   return (
-    <nav className='flex flex-row justify-center my-6'>
+    <nav className='flex flex-col items-center justify-center my-6'>
       <div className='flex flex-row w-3/4 items-center justify-center space-x-4 phone:w-4/5'>
         <input
           value={city}
@@ -44,6 +47,7 @@ function Inputs({ setQuery }) {
           onClick={handleLocationClick}
         />
       </div>
+      <p className='text-white text-xl font-bold mt-2'>{error}</p>
     </nav>
   );
 }

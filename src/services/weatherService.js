@@ -1,4 +1,5 @@
 import { Settings, DateTime } from 'luxon';
+import axios from 'axios';
 
 const API_KEY = '35b70f9b28b67917f925491d2c2246e3';
 const BASE_URL = 'https://api.openweathermap.org/data/2.5';
@@ -13,8 +14,7 @@ const getWeatherData = async (infoType, searchParams) => {
     appid: API_KEY,
   });
 
-  const res = await fetch(url);
-  return await res.json();
+  return axios.get(url).then(res => res.data);
 };
 
 const formatCurrentWeather = data => {

@@ -10,12 +10,20 @@ function App() {
   const [query, setQuery] = useState({ q: 'kyiv' });
   const [units, setUnits] = useState('metric');
   const [weather, setWeather] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchWeather = async () => {
-      await getFormattedWeatherData({ ...query, units }).then(data => {
-        setWeather(data);
-      });
+      await getFormattedWeatherData({ ...query, units })
+        .then(data => {
+          setWeather(data);
+          setError('');
+        })
+        .catch(e =>
+          e.response.status === 404
+            ? setError('Місто не знайдено')
+            : setError(e.response.statusText)
+        );
     };
 
     fetchWeather();
@@ -27,7 +35,7 @@ function App() {
       from-cyan-700 to-blue-700 h-fit shadow-xl shadow-gray-400' */}
       <header>
         <TopButtons setQuery={setQuery} />
-        <Inputs setQuery={setQuery} />
+        <Inputs setQuery={setQuery} error={error} />
       </header>
 
       {weather && (

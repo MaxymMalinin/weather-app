@@ -43,7 +43,9 @@ function TemperatureAndDetails({
         <div className='flex flex-row w-1/4 items-center justify-center'>
           <button
             name='metric'
-            className='text-xl text-white font-medium transition ease-out hover:scale-125 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300'
+            className={`text-xl text-white font-medium transition ease-out hover:scale-125 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300 ${
+              units === 'metric' ? 'font-bold text-2xl' : ''
+            }`}
             onClick={handleUnitsChange}
           >
             °C
@@ -51,7 +53,9 @@ function TemperatureAndDetails({
           <p className='text-xl text-white mx-1'>|</p>
           <button
             name='imperial'
-            className='text-xl text-white font-medium transition ease-out hover:scale-125 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300'
+            className={`text-xl text-white font-medium transition ease-out hover:scale-125 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300 ${
+              units === 'imperial' ? 'font-bold text-2xl' : ''
+            }`}
             onClick={handleUnitsChange}
           >
             °F
