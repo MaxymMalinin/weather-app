@@ -521,6 +521,9 @@ body {
 .mr-1 {
   margin-right: 0.25rem;
 }
+.mt-2 {
+  margin-top: 0.5rem;
+}
 .mt-4 {
   margin-top: 1rem;
 }
@@ -661,6 +664,10 @@ body {
 .pt-3 {
   padding-top: 0.75rem;
 }
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
@@ -680,6 +687,9 @@ body {
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
+}
+.font-bold {
+  font-weight: 700;
 }
 .font-extralight {
   font-weight: 200;
