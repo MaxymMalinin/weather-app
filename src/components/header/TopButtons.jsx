@@ -25,11 +25,11 @@ function TopButtons({ setQuery }) {
   ];
 
   return (
-    <nav className='flex items-center justify-around my-6'>
+    <nav className='flex items-center justify-around pt-3'>
       {cities.map(city => (
         <button
           key={city.id}
-          className='text-white text-lg font-medium'
+          className='text-white text-lg font-medium focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300'
           onClick={() => setQuery({ q: city.title })}
         >
           {city.title}

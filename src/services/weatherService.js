@@ -29,7 +29,6 @@ const formatCurrentWeather = data => {
   } = data;
 
   const { description, icon } = weather[0];
-  //TODO: translator (name, country)
   return {
     lat,
     lon,
@@ -102,7 +101,7 @@ const getFormattedWeatherData = async searchParams => {
 const formatToLocalTime = (
   secs,
   zone,
-  format = "dd MMMM yyyy' | місцевий час: 'T"
+  format = "dd MMM yyyy' | місцевий час: 'T"
 ) => DateTime.fromSeconds(secs).setZone(zone).toFormat(format);
 
 const iconUrlFromCode = code =>

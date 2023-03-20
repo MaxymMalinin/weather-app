@@ -1,13 +1,8 @@
 import React, { useState } from 'react';
 import { UilSearch, UilLocationPoint } from '@iconscout/react-unicons';
 
-function Inputs({ setQuery, units, setUnits }) {
+function Inputs({ setQuery }) {
   const [city, setCity] = useState('');
-
-  const handleUnitsChange = e => {
-    const selectedUnit = e.currentTarget.name;
-    if (units !== selectedUnit) setUnits(selectedUnit);
-  };
 
   const handleSearchClick = () => {
     if (city !== '') setQuery({ q: city });
@@ -29,15 +24,14 @@ function Inputs({ setQuery, units, setUnits }) {
 
   return (
     <nav className='flex flex-row justify-center my-6'>
-      <div className='flex flex-row w-3/4 items-center justify-center space-x-4'>
+      <div className='flex flex-row w-3/4 items-center justify-center space-x-4 phone:w-4/5'>
         <input
           value={city}
           onChange={e => setCity(e.currentTarget.value)}
           type='text'
           placeholder='Пошук міста...'
-          className='text-xl font-light p-2 w-full shadow-xl focus:outline-none capitalize placeholder:lowercase'
+          className='text-xl font-light p-2 w-full shadow-xl capitalize placeholder:lowercase rounded-3xl focus:outline focus:outline-2 focus:outline-offset-4 focus:outline-cyan-300'
           onKeyUp={e => (e.key === 'Enter' ? handleSearchClick() : false)}
-          //TODO focus styling, fonts
         />
         <UilSearch
           size={25}
@@ -49,24 +43,6 @@ function Inputs({ setQuery, units, setUnits }) {
           className='text-white cursor-pointer transition ease-out hover:scale-125'
           onClick={handleLocationClick}
         />
-      </div>
-
-      <div className='flex flex-row w-1/4 items-center justify-center'>
-        <button
-          name='metric'
-          className='text-xl text-white font-light transition ease-out hover:scale-125'
-          onClick={handleUnitsChange}
-        >
-          °C
-        </button>
-        <p className='text-xl text-white mx-1'>|</p>
-        <button
-          name='imperial'
-          className='text-xl text-white font-light transition ease-out hover:scale-125'
-          onClick={handleUnitsChange}
-        >
-          °F
-        </button>
       </div>
     </nav>
   );

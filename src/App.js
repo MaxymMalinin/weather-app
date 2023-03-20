@@ -1,4 +1,3 @@
-import './App.css';
 import TopButtons from './components/header/TopButtons';
 import Inputs from './components/header/Inputs';
 import TimeAndLocation from './components/main/TimeAndLocation';
@@ -26,21 +25,19 @@ function App() {
     <>
       {/* className='mx-auto max-w-screen-md mt-4 py-5 px-32 bg-gradient-to-br
       from-cyan-700 to-blue-700 h-fit shadow-xl shadow-gray-400' */}
-      <header
-        className='mx-auto max-w-screen-md mt-4 py-5 px-32 bg-gradient-to-br
-      from-cyan-700 to-blue-700 h-fit shadow-xl shadow-gray-400'
-      >
+      <header>
         <TopButtons setQuery={setQuery} />
-        <Inputs setQuery={setQuery} units={units} setUnits={setUnits} />
+        <Inputs setQuery={setQuery} />
       </header>
 
       {weather && (
-        <main
-          className='mx-auto max-w-screen-md mt-4 py-5 px-32 bg-gradient-to-br
-      from-cyan-700 to-blue-700 h-fit shadow-xl shadow-gray-400'
-        >
+        <main>
           <TimeAndLocation weather={weather} />
-          <TemperatureAndDetails weather={weather} units={units} />
+          <TemperatureAndDetails
+            weather={weather}
+            units={units}
+            setUnits={setUnits}
+          />
 
           <Forecast
             title='Погода на 3 години'
